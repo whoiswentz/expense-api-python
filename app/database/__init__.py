@@ -1,24 +1,26 @@
 from contextlib import asynccontextmanager
-from typing import AsyncGenerator
+from typing import AsyncGenerator, Any
 
 from fastapi import FastAPI
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database.database_session_manager import DatabaseSessionManager
 from app.schemas import settings
 
-sessionmanager = DatabaseSessionManager(settings.database_url, {
+
+string_database_url = str(settings.database_url)
+sessionmanager = DatabaseSessionManager(string_database_url, {
     "echo": settings.echo_sql
 })
 
 
-async def get_db() -> AsyncGenerator[Session, None]:
+async def get_db() -> AsyncGenerator[AsyncSession, Any]:
     async with sessionmanager.session() as session:
         yield session
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI) -> None:
+async def lifespan(app: FastAPI) -> AsyncGenerator:
     yield
     if sessionmanager.engine is not None:
         await sessionmanager.close()

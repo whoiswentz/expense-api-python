@@ -1,3 +1,3 @@
-from .settings import Settings
+from .application_settings import ApplicationSettings
 
-settings = Settings()
+settings = ApplicationSettings()

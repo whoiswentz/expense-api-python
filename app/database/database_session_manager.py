@@ -10,8 +10,8 @@ from sqlalchemy.ext.asyncio import (
 
 
 class DatabaseSessionManager:
-    def __init__(self, host: str, engine_kwargs: dict[str, Any] = {}):
-        self._engine = create_async_engine(host, **engine_kwargs)
+    def __init__(self, database_url: str, engine_kwargs: dict[str, Any] = {}):
+        self._engine = create_async_engine(database_url, **engine_kwargs)
         self._sessionmaker = async_sessionmaker(autocommit=False, bind=self._engine)
 
     async def close(self) -> None:
