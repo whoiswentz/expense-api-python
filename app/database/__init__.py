@@ -2,12 +2,18 @@ from contextlib import asynccontextmanager
 from typing import AsyncGenerator, Any
 
 from fastapi import FastAPI
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.ext.asyncio import AsyncSession, AsyncAttrs
+from sqlalchemy.orm import DeclarativeBase
 
 from app.database.database_session_manager import DatabaseSessionManager
-from app.schemas import settings
+from app.schemas import get_settings
 
 
+class Base(AsyncAttrs, DeclarativeBase):
+    ...
+
+
+settings = get_settings()
 string_database_url = str(settings.database_url)
 sessionmanager = DatabaseSessionManager(string_database_url, {
     "echo": settings.echo_sql

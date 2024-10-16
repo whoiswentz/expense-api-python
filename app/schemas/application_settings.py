@@ -1,5 +1,5 @@
 from pydantic import Field, PostgresDsn
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class ApplicationSettings(BaseSettings):
@@ -7,6 +7,4 @@ class ApplicationSettings(BaseSettings):
     debug_log: bool = Field(True, description="Enable or disable debug logging")
     echo_sql: bool = Field(True, description="Log all SQL statements executed by SQLAlchemy")
 
-    class Config:
-        env_file = "../.env"
-        env_file_encoding = 'utf-8'
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
