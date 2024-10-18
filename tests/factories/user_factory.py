@@ -1,10 +1,9 @@
 import uuid
 
+import factory
 from factory.alchemy import SQLAlchemyModelFactory
 
-from app.models.user import User
-
-import factory
+from app.infrastructure.entities.user import User
 
 
 class UserFactory(SQLAlchemyModelFactory):

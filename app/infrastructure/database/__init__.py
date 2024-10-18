@@ -5,8 +5,8 @@ from fastapi import FastAPI
 from sqlalchemy.ext.asyncio import AsyncSession, AsyncAttrs
 from sqlalchemy.orm import DeclarativeBase
 
-from app.database.database_session_manager import DatabaseSessionManager
-from app.schemas import get_settings
+from app.domain.models import get_settings
+from app.infrastructure.database.database_session_manager import DatabaseSessionManager
 
 
 class Base(AsyncAttrs, DeclarativeBase):

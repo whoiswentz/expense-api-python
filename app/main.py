@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 
-from app.database import lifespan
+from app.infrastructure.database import lifespan
 
 app = FastAPI(lifespan=lifespan)
 

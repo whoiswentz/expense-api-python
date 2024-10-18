@@ -1,9 +1,8 @@
 import uuid
 
-from sqlalchemy import Column, Integer, Text, UUID, String
-from sqlalchemy_utils import EncryptedType
+from sqlalchemy import Column, Text, UUID, String
 
-from app.database import Base
+from app.infrastructure.database import Base
 
 
 class User(Base):

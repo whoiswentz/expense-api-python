@@ -2,12 +2,13 @@ from fastapi import Depends
 from returns.result import Success, Failure, Result
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.database import get_db
-from app.models.user import User
-from app.schemas.user import UserCreation
+from app.domain.models.user import UserCreation
+from app.domain.repositories.user_repostory import UserRepositoryProtocol
+from app.infrastructure.database import get_db
+from app.infrastructure.entities.user import User
 
 
-class UserRepository:
+class UserRepository(UserRepositoryProtocol):
     def __init__(self, db: AsyncSession = Depends(get_db)):
         self.db = db
 
@@ -25,3 +26,5 @@ class UserRepository:
         except Exception as e:
             await self.db.rollback()
             return Failure(e)
+
+

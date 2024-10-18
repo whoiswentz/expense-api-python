@@ -12,8 +12,8 @@ from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy_utils.functions.database import _set_url_database, _sqlite_file_exists, make_url
 from sqlalchemy_utils.functions.orm import quote
 
-from app.database import Base
-from app.schemas import ApplicationSettings
+from app.domain.models import ApplicationSettings
+from app.infrastructure.database import Base
 
 
 @lru_cache

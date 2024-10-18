@@ -2,9 +2,9 @@ import factory
 import pytest
 from returns.result import Success
 
-from app.models.user import User
-from app.repositories.user_repository import UserRepository
-from app.schemas.user import UserCreation
+from app.domain.models.user import UserCreation
+from app.infrastructure.entities.user import User
+from app.infrastructure.repositories import UserRepository
 from tests.factories.user_factory import UserFactory
 
 
