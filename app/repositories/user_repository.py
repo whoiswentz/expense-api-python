@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
 from app.models.user import User
 from app.schemas.user import UserCreation
+from app.utils import password
 
 
 class UserRepository:
@@ -25,3 +26,9 @@ class UserRepository:
         except Exception as e:
             await self.db.rollback()
             return Failure(e)
+
+
+    def hash_user_password(self, user: User) -> User:
+        hashed_password = password.get_password_hash(user.password)
+        user.hashed_password = hashed_password
+        return user
